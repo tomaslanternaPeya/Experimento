@@ -1,6 +1,8 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.*
+
 
 plugins {
   kotlin ("jvm") version "1.6.10"
@@ -12,7 +14,18 @@ group = "com.example"
 version = "1.0.0-SNAPSHOT"
 
 repositories {
+  mavenLocal()
   mavenCentral()
+  jcenter()
+  maven {
+    name = "pedidosya.jfrog"
+    url = URI("https://pedidosya.jfrog.io/artifactory/pedidosya-gradle-prod-local")
+    credentials {
+      username = project.property("artifactory.username") as String
+      password = project.property("artifactory.password") as String
+    }
+  }
+  maven("https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
 val vertxVersion = "4.3.2"
@@ -43,6 +56,16 @@ dependencies {
   implementation("io.vertx:vertx-circuit-breaker")
   implementation("io.vertx:vertx-mongo-client")
   implementation("io.vertx:vertx-lang-kotlin")
+  /*implementation("aws.sdk.kotlin:s3:0.9.4-beta")
+  implementation("aws.sdk.kotlin:dynamodb:0.9.4-beta")
+  implementation("aws.sdk.kotlin:iam:0.9.4-beta")
+  implementation("aws.sdk.kotlin:cloudwatch:0.9.4-beta")
+  implementation("aws.sdk.kotlin:cognito:0.9.4-beta")
+  implementation("aws.sdk.kotlin:sns:0.9.4-beta")
+  implementation("aws.sdk.kotlin:pinpoint:0.9.4-beta")*/
+  implementation("com.pedidosya.aws.sdk:aws-sdk-dynamodb:1.0")
+  implementation("com.pedidosya.courier.common:courier-common:1.0.27")
+  implementation("com.pedidosya.courier.common:courier-common-dynamodb:1.0.27")
   implementation(kotlin("stdlib-jdk8"))
   testImplementation("io.vertx:vertx-unit")
   testImplementation("junit:junit:4.13.1")

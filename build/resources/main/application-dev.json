@@ -1,0 +1,16 @@
+{
+  "awsRegion": "us-east-2",
+  "awsAccountId": "000000000000",
+  "instances": {
+    "server": 2
+  },
+  "aws": {
+    "dynamoDb": {
+      "endpointOverride": "http://localhost:4566",
+      "table": {
+        "name": "Users",
+        "partitionKey": "userId"
+      }
+    }
+  }
+}

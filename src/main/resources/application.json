@@ -1,0 +1,12 @@
+{
+  "app_name": "Experiment",
+  "instances": {},
+  "server": {
+    "port": 8080
+  },
+  "awsAccess": "x",
+  "awsSecret": "x",
+  "awsRegion": "x",
+  "awsAccountId": "x",
+  "clientToken":"x"
+}
